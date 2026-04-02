@@ -6,7 +6,49 @@
         xmlns:local="clr-namespace:NUZ43X_GUI"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
+    <Grid Margin="15">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
 
+        <TextBlock Grid.Row="0"
+                   Text="Gyakorlatok"
+                   FontSize="22"
+                   FontWeight="Bold"
+                   Margin="0,0,0,15"/>
+
+        <DataGrid x:Name="ExercisesDataGrid"
+                  Grid.Row="1"
+                  AutoGenerateColumns="False"
+                  ItemsSource="{Binding}"
+                  Margin="0,0,0,15"
+                  IsReadOnly="True"
+                  SelectionMode="Single"
+                  SelectionUnit="FullRow">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Név" Binding="{Binding Name}" Width="2*"/>
+                <DataGridTextColumn Header="Kategória" Binding="{Binding Category}" Width="2*"/>
+                <DataGridTextColumn Header="Leírás" Binding="{Binding Description}" Width="3*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <StackPanel Grid.Row="2"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Right">
+            <Button Content="Új gyakorlat"
+                    Width="120"
+                    Margin="0,0,10,0"
+                    Click="AddExerciseButton_Click"/>
+            <Button Content="Szerkesztés"
+                    Width="120"
+                    Margin="0,0,10,0"
+                    Click="EditExerciseButton_Click"/>
+            <Button Content="Törlés"
+                    Width="120"
+                    Click="DeleteExerciseButton_Click"/>
+        </StackPanel>
     </Grid>
+
 </Window>

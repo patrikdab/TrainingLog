@@ -1,0 +1,68 @@
+﻿<Window x:Class="NUZ43X_GUI.ExerciseEditorWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:NUZ43X_GUI"
+        mc:Ignorable="d"
+        Title="ExerciseEditorWindow" Height="450" Width="800">
+    <Grid Margin="15">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Grid.Row="0"
+                   Grid.Column="0"
+                   Margin="0,0,10,10"
+                   VerticalAlignment="Center"
+                   Text="Név:"/>
+        <TextBox Grid.Row="0"
+                 Grid.Column="1"
+                 Margin="0,0,0,10"
+                 Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"/>
+
+        <TextBlock Grid.Row="1"
+                   Grid.Column="0"
+                   Margin="0,0,10,10"
+                   VerticalAlignment="Center"
+                   Text="Kategória:"/>
+        <TextBox Grid.Row="1"
+                 Grid.Column="1"
+                 Margin="0,0,0,10"
+                 Text="{Binding Category, UpdateSourceTrigger=PropertyChanged}"/>
+
+        <TextBlock Grid.Row="2"
+                   Grid.Column="0"
+                   Margin="0,0,10,10"
+                   VerticalAlignment="Top"
+                   Text="Leírás:"/>
+        <TextBox Grid.Row="2"
+                 Grid.Column="1"
+                 AcceptsReturn="True"
+                 TextWrapping="Wrap"
+                 VerticalScrollBarVisibility="Auto"
+                 Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}"/>
+
+        <StackPanel Grid.Row="3"
+                    Grid.ColumnSpan="2"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Right"
+                    Margin="0,15,0,0">
+            <Button Content="Mentés"
+                    Width="90"
+                    Margin="0,0,10,0"
+                    Click="SaveButton_Click"/>
+            <Button Content="Mégse"
+                    Width="90"
+                    Click="CancelButton_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>
