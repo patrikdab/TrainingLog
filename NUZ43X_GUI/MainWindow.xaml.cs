@@ -1,4 +1,5 @@
-﻿using NUZ43X_GUI.Models.TrainingLog.Models;
+﻿using NUZ43X_GUI.Models;
+using NUZ43X_GUI.Models.TrainingLog.Models;
 using System.Collections.ObjectModel;
 using System.Text;
 using System.Windows;
@@ -13,17 +14,20 @@ using System.Windows.Shapes;
 
 namespace NUZ43X_GUI
 {
-   
+
     public partial class MainWindow : Window
     {
-        private ObservableCollection<Exercise> exercises;
+        public ObservableCollection<Exercise> Exercises { get; set; }
+        public ObservableCollection<Workout> Workouts { get; set; }
 
         public MainWindow()
         {
             InitializeComponent();
 
-            exercises = new ObservableCollection<Exercise>();
-            DataContext = exercises;
+            Exercises = new ObservableCollection<Exercise>();
+            Workouts = new ObservableCollection<Workout>();
+
+            DataContext = this;
         }
 
         private void AddExerciseButton_Click(object sender, RoutedEventArgs e)
@@ -35,7 +39,7 @@ namespace NUZ43X_GUI
 
             if (result == true)
             {
-                exercises.Add(editorWindow.Exercise);
+                Exercises.Add(editorWindow.Exercise);
             }
         }
 
@@ -82,7 +86,20 @@ namespace NUZ43X_GUI
 
             if (result == MessageBoxResult.Yes)
             {
-                exercises.Remove(selectedExercise);
+                Exercises.Remove(selectedExercise);
+            }
+        }
+
+        private void AddWorkout_Click(object sender, RoutedEventArgs e)
+        {
+            WorkoutWindow window = new WorkoutWindow(Exercises.ToList());
+            window.Owner = this;
+
+            bool? result = window.ShowDialog();
+
+            if (result == true)
+            {
+                Workouts.Add(window.Workout);
             }
         }
     }

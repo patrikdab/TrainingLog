@@ -9,7 +9,10 @@
     <Grid Margin="15">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="2*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
@@ -22,7 +25,7 @@
         <DataGrid x:Name="ExercisesDataGrid"
                   Grid.Row="1"
                   AutoGenerateColumns="False"
-                  ItemsSource="{Binding}"
+                  ItemsSource="{Binding Exercises}"
                   Margin="0,0,0,15"
                   IsReadOnly="True"
                   SelectionMode="Single"
@@ -36,7 +39,8 @@
 
         <StackPanel Grid.Row="2"
                     Orientation="Horizontal"
-                    HorizontalAlignment="Right">
+                    HorizontalAlignment="Right"
+                    Margin="0,0,0,20">
             <Button Content="Új gyakorlat"
                     Width="120"
                     Margin="0,0,10,0"
@@ -49,6 +53,35 @@
                     Width="120"
                     Click="DeleteExerciseButton_Click"/>
         </StackPanel>
-    </Grid>
 
+        <TextBlock Grid.Row="3"
+                   Text="Edzések"
+                   FontSize="22"
+                   FontWeight="Bold"
+                   Margin="0,0,0,15"/>
+
+        <DataGrid x:Name="WorkoutsDataGrid"
+                  Grid.Row="4"
+                  AutoGenerateColumns="False"
+                  ItemsSource="{Binding Workouts}"
+                  Margin="0,0,0,15"
+                  IsReadOnly="True"
+                  SelectionMode="Single"
+                  SelectionUnit="FullRow">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Dátum" Binding="{Binding Date, StringFormat=d}" Width="2*"/>
+                <DataGridTextColumn Header="Cím" Binding="{Binding Title}" Width="3*"/>
+                <DataGridTextColumn Header="Megjegyzés" Binding="{Binding Notes}" Width="3*"/>
+                <DataGridTextColumn Header="Gyakorlatok száma" Binding="{Binding Entries.Count}" Width="2*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <StackPanel Grid.Row="5"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Right">
+            <Button Content="Új edzés"
+                    Width="120"
+                    Click="AddWorkout_Click"/>
+        </StackPanel>
+    </Grid>
 </Window>
