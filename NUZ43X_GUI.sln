@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36915.13 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NUZ43X_GUI", "NUZ43X_GUI\NUZ43X_GUI.csproj", "{564068F3-ED63-4054-9311-8E64FEFF0510}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{564068F3-ED63-4054-9311-8E64FEFF0510}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{564068F3-ED63-4054-9311-8E64FEFF0510}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{564068F3-ED63-4054-9311-8E64FEFF0510}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{564068F3-ED63-4054-9311-8E64FEFF0510}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5D47E7F8-E34F-4C0B-8A39-C4457C4DE2CE}
+	EndGlobalSection
+EndGlobal
