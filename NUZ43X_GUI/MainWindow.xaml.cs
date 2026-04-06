@@ -1,5 +1,6 @@
 ﻿using NUZ43X_GUI.Models;
 using NUZ43X_GUI.Models.TrainingLog.Models;
+using NUZ43X_GUI.Services;
 using System.Collections.ObjectModel;
 using System.Text;
 using System.Windows;
@@ -17,6 +18,8 @@ namespace NUZ43X_GUI
 
     public partial class MainWindow : Window
     {
+        private readonly JsonDataService dataService;
+
         public ObservableCollection<Exercise> Exercises { get; set; }
         public ObservableCollection<Workout> Workouts { get; set; }
 
@@ -24,8 +27,10 @@ namespace NUZ43X_GUI
         {
             InitializeComponent();
 
-            Exercises = new ObservableCollection<Exercise>();
-            Workouts = new ObservableCollection<Workout>();
+            dataService = new JsonDataService();
+
+            Exercises = dataService.LoadExercises();
+            Workouts = dataService.LoadWorkouts();
 
             DataContext = this;
         }
@@ -40,6 +45,7 @@ namespace NUZ43X_GUI
             if (result == true)
             {
                 Exercises.Add(editorWindow.Exercise);
+                dataService.SaveExercises(Exercises);
             }
         }
 
@@ -65,6 +71,7 @@ namespace NUZ43X_GUI
                 selectedExercise.Description = editorWindow.Exercise.Description;
 
                 ExercisesDataGrid.Items.Refresh();
+                dataService.SaveExercises(Exercises);
             }
         }
 
@@ -87,6 +94,7 @@ namespace NUZ43X_GUI
             if (result == MessageBoxResult.Yes)
             {
                 Exercises.Remove(selectedExercise);
+                dataService.SaveExercises(Exercises);
             }
         }
 
@@ -100,6 +108,7 @@ namespace NUZ43X_GUI
             if (result == true)
             {
                 Workouts.Add(window.Workout);
+                dataService.SaveWorkouts(Workouts);
             }
         }
     }
