@@ -30,7 +30,7 @@ namespace NUZ43X_GUI
             ExerciseComboBox.ItemsSource = exercises;
         }
 
-        private void AddExercise_Click(object sender, RoutedEventArgs e)
+        private void AddSet_Click(object sender, RoutedEventArgs e)
         {
             Exercise selectedExercise = ExerciseComboBox.SelectedItem as Exercise;
 
@@ -40,17 +40,57 @@ namespace NUZ43X_GUI
                 return;
             }
 
-            WorkoutEntry entry = new WorkoutEntry
+            if (!double.TryParse(WeightTextBox.Text, out double weight) || weight < 0)
             {
-                ExerciseId = selectedExercise.Id,
-                ExerciseName = selectedExercise.Name
+                MessageBox.Show("Adj meg egy érvényes súlyt.", "Figyelmeztetés", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
+
+            if (!int.TryParse(RepetitionsTextBox.Text, out int repetitions) || repetitions <= 0)
+            {
+                MessageBox.Show("Adj meg egy érvényes ismétlésszámot.", "Figyelmeztetés", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
+
+            WorkoutEntry existingEntry = Workout.Entries.FirstOrDefault(ei => ei.ExerciseId == selectedExercise.Id);
+
+            if (existingEntry == null)
+            {
+                existingEntry = new WorkoutEntry
+                {
+                    ExerciseId = selectedExercise.Id,
+                    ExerciseName = selectedExercise.Name
+                };
+
+                Workout.Entries.Add(existingEntry);
+            }
+
+            SetEntry newSet = new SetEntry
+            {
+                SetNumber = existingEntry.Sets.Count + 1,
+                Weight = weight,
+                Repetitions = repetitions
             };
 
-            Workout.Entries.Add(entry);
+            existingEntry.Sets.Add(newSet);
+
+            WorkoutEntriesDataGrid.Items.Refresh();
+
+            WeightTextBox.Clear();
+            RepetitionsTextBox.Clear();
+            WeightTextBox.Focus();
+
+            WorkoutEntriesDataGrid.Items.Refresh();
         }
 
         private void Save_Click(object sender, RoutedEventArgs e)
         {
+            if (Workout.Entries.Count == 0)
+            {
+                MessageBox.Show("Legalább egy sorozatot adj hozzá az edzéshez.", "Figyelmeztetés", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
+
             DialogResult = true;
             Close();
         }

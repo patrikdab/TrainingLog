@@ -23,6 +23,13 @@ namespace NUZ43X_GUI.Models
             Notes = string.Empty;
             Sets = new List<SetEntry>();
         }
+        public string SetSummary
+        {
+            get
+            {
+                return string.Join(", ", Sets.Select(s => $"{s.Weight} kg x {s.Repetitions}"));
+            }
+        }
         public int TotalRepetitions => Sets.Sum(s => s.Repetitions);
         public double TotalVolume => Sets.Sum(s => s.Weight * s.Repetitions);
         public double MaxWeight => Sets.Count == 0 ? 0 : Sets.Max(s => s.Weight);

@@ -11,42 +11,100 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Text="Dátum:"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="120"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="120"/>
+            <ColumnDefinition Width="120"/>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Grid.Row="0"
+                   Grid.Column="0"
+                   VerticalAlignment="Center"
+                   Margin="0,0,10,10"
+                   Text="Dátum:"/>
         <DatePicker Grid.Row="0"
-                    Margin="80,0,0,10"
+                    Grid.Column="1"
+                    Margin="0,0,10,10"
                     SelectedDate="{Binding Date}"/>
 
-        <TextBlock Grid.Row="1" Text="Cím:"/>
+        <TextBlock Grid.Row="1"
+                   Grid.Column="0"
+                   VerticalAlignment="Center"
+                   Margin="0,0,10,10"
+                   Text="Cím:"/>
         <TextBox Grid.Row="1"
-                 Margin="80,0,0,10"
+                 Grid.Column="1"
+                 Grid.ColumnSpan="3"
+                 Margin="0,0,0,10"
                  Text="{Binding Title}"/>
 
-        <TextBlock Grid.Row="2" Text="Gyakorlat:"/>
+        <TextBlock Grid.Row="2"
+                   Grid.Column="0"
+                   VerticalAlignment="Center"
+                   Margin="0,0,10,10"
+                   Text="Gyakorlat:"/>
         <ComboBox x:Name="ExerciseComboBox"
                   Grid.Row="2"
-                  Margin="80,0,0,10"
+                  Grid.Column="1"
+                  Margin="0,0,10,10"
                   DisplayMemberPath="Name"/>
 
+        <TextBlock Grid.Row="2"
+                   Grid.Column="2"
+                   VerticalAlignment="Center"
+                   Margin="0,0,10,10"
+                   Text="Súly:"/>
+        <TextBox x:Name="WeightTextBox"
+                 Grid.Row="2"
+                 Grid.Column="3"
+                 Margin="0,0,0,10"/>
+
+        <TextBlock Grid.Row="3"
+                   Grid.Column="2"
+                   VerticalAlignment="Center"
+                   Margin="0,0,10,10"
+                   Text="Ismétlés:"/>
+        <TextBox x:Name="RepetitionsTextBox"
+                 Grid.Row="3"
+                 Grid.Column="3"
+                 Margin="0,0,0,10"/>
+
         <Button Grid.Row="3"
-                Content="Hozzáadás"
-                Width="120"
+                Grid.Column="1"
+                Width="140"
                 Height="30"
                 HorizontalAlignment="Left"
-                Click="AddExercise_Click"/>
+                Content="Sorozat hozzáadása"
+                Click="AddSet_Click"/>
 
-        <ListBox Grid.Row="3"
-                 Margin="140,0,0,0"
-                 ItemsSource="{Binding Entries}"
-                 DisplayMemberPath="ExerciseName"/>
+        <DataGrid x:Name="WorkoutEntriesDataGrid"
+          Grid.Row="4"
+          Grid.Column="0"
+          Grid.ColumnSpan="4"
+          AutoGenerateColumns="False"
+          Margin="0,15,0,15"
+          IsReadOnly="True"
+          SelectionMode="Single"
+          SelectionUnit="FullRow"
+          ItemsSource="{Binding Entries}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Gyakorlat" Binding="{Binding ExerciseName}" Width="2*"/>
+                <DataGridTextColumn Header="Sorozatok száma" Binding="{Binding Sets.Count}" Width="*"/>
+                <DataGridTextColumn Header="Sorozatok" Binding="{Binding SetSummary}" Width="3*"/>
+            </DataGrid.Columns>
+        </DataGrid>
 
-        <Button Grid.Row="4"
-                Content="Mentés"
+        <Button Grid.Row="5"
+                Grid.Column="3"
                 Width="120"
                 HorizontalAlignment="Right"
+                Content="Mentés"
                 Click="Save_Click"/>
     </Grid>
 </Window>
