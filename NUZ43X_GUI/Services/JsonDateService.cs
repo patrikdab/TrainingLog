@@ -16,6 +16,7 @@ namespace NUZ43X_GUI.Services
         private readonly string dataFolderPath;
         private readonly string exercisesFilePath;
         private readonly string workoutsFilePath;
+        private readonly string bodyWeightsFilePath;
         private readonly JsonSerializerOptions jsonOptions;
 
         public JsonDataService()
@@ -23,6 +24,7 @@ namespace NUZ43X_GUI.Services
             dataFolderPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Data");
             exercisesFilePath = Path.Combine(dataFolderPath, "exercises.json");
             workoutsFilePath = Path.Combine(dataFolderPath, "workouts.json");
+            bodyWeightsFilePath = Path.Combine(dataFolderPath, "bodyweights.json");
 
             jsonOptions = new JsonSerializerOptions
             {
@@ -61,6 +63,19 @@ namespace NUZ43X_GUI.Services
             return workouts ?? new ObservableCollection<Workout>();
         }
 
+        public ObservableCollection<BodyWeightEntry> LoadBodyWeights()
+        {
+            if (!File.Exists(bodyWeightsFilePath))
+            {
+                return new ObservableCollection<BodyWeightEntry>();
+            }
+
+            string json = File.ReadAllText(bodyWeightsFilePath);
+            ObservableCollection<BodyWeightEntry>? bodyWeights = JsonSerializer.Deserialize<ObservableCollection<BodyWeightEntry>>(json, jsonOptions);
+
+            return bodyWeights ?? new ObservableCollection<BodyWeightEntry>();
+        }
+
         public void SaveExercises(ObservableCollection<Exercise> exercises)
         {
             string json = JsonSerializer.Serialize(exercises, jsonOptions);
@@ -72,5 +87,12 @@ namespace NUZ43X_GUI.Services
             string json = JsonSerializer.Serialize(workouts, jsonOptions);
             File.WriteAllText(workoutsFilePath, json);
         }
+
+        public void SaveBodyWeights(ObservableCollection<BodyWeightEntry> bodyWeights)
+        {
+            string json = JsonSerializer.Serialize(bodyWeights, jsonOptions);
+            File.WriteAllText(bodyWeightsFilePath, json);
+        }
     }
+
 }

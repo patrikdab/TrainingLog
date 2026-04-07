@@ -22,6 +22,7 @@ namespace NUZ43X_GUI
 
         public ObservableCollection<Exercise> Exercises { get; set; }
         public ObservableCollection<Workout> Workouts { get; set; }
+        public ObservableCollection<BodyWeightEntry> BodyWeights { get; set; }
 
         public MainWindow()
         {
@@ -31,6 +32,7 @@ namespace NUZ43X_GUI
 
             Exercises = dataService.LoadExercises();
             Workouts = dataService.LoadWorkouts();
+            BodyWeights = dataService.LoadBodyWeights();
 
             DataContext = this;
         }
@@ -109,6 +111,20 @@ namespace NUZ43X_GUI
             {
                 Workouts.Add(window.Workout);
                 dataService.SaveWorkouts(Workouts);
+            }
+        }
+
+        private void AddBodyWeightButton_Click(object sender, RoutedEventArgs e)
+        {
+            BodyWeightWindow window = new BodyWeightWindow();
+            window.Owner = this;
+
+            bool? result = window.ShowDialog();
+
+            if (result == true)
+            {
+                BodyWeights.Add(window.BodyWeightEntry);
+                dataService.SaveBodyWeights(BodyWeights);
             }
         }
     }
