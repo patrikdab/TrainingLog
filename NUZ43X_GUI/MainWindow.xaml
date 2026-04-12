@@ -110,6 +110,18 @@
                 </StackPanel>
             </GroupBox>
 
+            <StackPanel Orientation="Horizontal"
+            HorizontalAlignment="Right"
+            Margin="0,10,0,0">
+                <Button Content="Statisztika"
+            Width="120"
+            Margin="0,0,10,0"
+            Click="OpenStatisticsButton_Click"/>
+                <Button Content="Új edzés"
+            Width="120"
+            Click="AddWorkout_Click"/>
+            </StackPanel>
+
         </StackPanel>
     </ScrollViewer>
 </Window>

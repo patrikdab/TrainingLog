@@ -127,5 +127,12 @@ namespace NUZ43X_GUI
                 dataService.SaveBodyWeights(BodyWeights);
             }
         }
+
+        private void OpenStatisticsButton_Click(object sender, RoutedEventArgs e)
+        {
+            StatisticsWindow window = new StatisticsWindow(Workouts.ToList(), Exercises.ToList());
+            window.Owner = this;
+            window.ShowDialog();
+        }
     }
 }
