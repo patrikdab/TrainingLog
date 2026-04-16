@@ -59,9 +59,6 @@
                             <DataGridTextColumn Header="Cím"
                                                 Binding="{Binding Title}"
                                                 Width="3*"/>
-                            <DataGridTextColumn Header="Megjegyzés"
-                                                Binding="{Binding Notes}"
-                                                Width="3*"/>
                             <DataGridTextColumn Header="Gyakorlatok száma"
                                                 Binding="{Binding Entries.Count}"
                                                 Width="2*"/>
@@ -94,9 +91,6 @@
                             <DataGridTextColumn Header="Testsúly (kg)"
                                                 Binding="{Binding Weight}"
                                                 Width="2*"/>
-                            <DataGridTextColumn Header="Megjegyzés"
-                                                Binding="{Binding Notes}"
-                                                Width="4*"/>
                         </DataGrid.Columns>
                     </DataGrid>
 

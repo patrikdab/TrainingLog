@@ -121,7 +121,11 @@ namespace NUZ43X_GUI
 
         private void OpenStatisticsButton_Click(object sender, RoutedEventArgs e)
         {
-            StatisticsWindow window = new StatisticsWindow(Workouts.ToList(), Exercises.ToList());
+            StatisticsWindow window = new StatisticsWindow(
+                Workouts.ToList(),
+                Exercises.ToList(),
+                BodyWeights.ToList());
+
             window.Owner = this;
             window.ShowDialog();
         }

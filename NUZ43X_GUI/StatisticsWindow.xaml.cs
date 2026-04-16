@@ -4,10 +4,10 @@ using System.Windows;
 
 namespace NUZ43X_GUI
 {
-    
+
     public partial class StatisticsWindow : Window
     {
-        public StatisticsWindow(List<Workout> workouts, List<Exercise> exercises)
+        public StatisticsWindow(List<Workout> workouts, List<Exercise> exercises, List<BodyWeightEntry> bodyWeights)
         {
             InitializeComponent();
 
@@ -33,6 +33,32 @@ namespace NUZ43X_GUI
             TotalRepetitionsTextBlock.Text = totalRepetitions.ToString();
             TotalVolumeTextBlock.Text = $"{totalVolume:F2} kg";
             ExerciseCountTextBlock.Text = exerciseCount.ToString();
+
+            int bodyWeightCount = bodyWeights.Count;
+            BodyWeightCountTextBlock.Text = bodyWeightCount.ToString();
+
+            if (bodyWeights.Count > 0)
+            {
+                BodyWeightEntry latestBodyWeight = bodyWeights
+                    .OrderByDescending(bw => bw.Date)
+                    .First();
+
+                double minBodyWeight = bodyWeights.Min(bw => bw.Weight);
+                double maxBodyWeight = bodyWeights.Max(bw => bw.Weight);
+                double averageBodyWeight = bodyWeights.Average(bw => bw.Weight);
+
+                CurrentBodyWeightTextBlock.Text = $"{latestBodyWeight.Weight:F1} kg";
+                MinBodyWeightTextBlock.Text = $"{minBodyWeight:F1} kg";
+                MaxBodyWeightTextBlock.Text = $"{maxBodyWeight:F1} kg";
+                AverageBodyWeightTextBlock.Text = $"{averageBodyWeight:F1} kg";
+            }
+            else
+            {
+                CurrentBodyWeightTextBlock.Text = "-";
+                MinBodyWeightTextBlock.Text = "-";
+                MaxBodyWeightTextBlock.Text = "-";
+                AverageBodyWeightTextBlock.Text = "-";
+            }
 
             List<ExerciseStatistics> statistics = workouts
                 .SelectMany(w => w.Entries)
@@ -61,3 +87,4 @@ namespace NUZ43X_GUI
         }
     }
 }
+
