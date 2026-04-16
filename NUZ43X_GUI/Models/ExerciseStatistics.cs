@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace NUZ43X_GUI.Models
+﻿namespace NUZ43X_GUI.Models
 {
     public class ExerciseStatistics
     {

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace NUZ43X_GUI.Models
+﻿namespace NUZ43X_GUI.Models
 {
     public class SetEntry
     {
@@ -14,7 +8,7 @@ namespace NUZ43X_GUI.Models
         public double Weight { get; set; }
         public int Repetitions { get; set; }       
         public double? Rpe { get; set; }
-        public string Notes { get; set; }
+        
         public SetEntry()
         {
             Id = Guid.NewGuid();
@@ -22,7 +16,7 @@ namespace NUZ43X_GUI.Models
             Weight = 0;
             Repetitions = 0;
             Rpe = null;
-            Notes = string.Empty;
+            
         }
         public override string ToString()
         {
